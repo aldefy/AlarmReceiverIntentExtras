@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">AlarmReminderNotification</string>
-    <string name="reminder_set_for">Reminder set for date : %s + 10 seconds from now</string>
+    <string name="reminder_set_for">Reminder set for date : %s + 5 seconds from now</string>
     <string name="pick_a_date_time">This is the solution flow</string>
     <string name="problem">This simulates the problem</string>
+    <string name="title_hint">Enter title for notification</string>
+    <string name="desc_hint">Enter description for notification</string>
 </resources>

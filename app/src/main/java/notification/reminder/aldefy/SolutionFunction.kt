@@ -3,8 +3,9 @@ package notification.reminder.aldefy
 import android.os.Parcel
 import android.os.Parcelable
 
-/**
- * Created by aditlal on 17/08/17.
+/*
+Solution for sending intent extras in alarm manager call for M and above
+https://stackoverflow.com/a/18000094/1749596
  */
 fun marshall(parceable: Parcelable): ByteArray {
     val parcel = Parcel.obtain()

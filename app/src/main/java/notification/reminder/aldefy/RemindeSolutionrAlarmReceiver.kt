@@ -13,16 +13,16 @@ import android.support.v4.app.NotificationCompat
 class ReminderSolutionAlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val bytes = intent.extras["reminder"] as ByteArray
-        val parcel = unmarshall(bytes = bytes)
-        val reminder = Model.Companion.CREATOR.createFromParcel(parcel)
+        val bytes = intent.extras["reminder"] as ByteArray //retrieve intent extras as bytes[]
+        val parcel = unmarshall(bytes = bytes) // unmarshall bytes[] into Parcelable object
+        val reminder = Model.Companion.CREATOR.createFromParcel(parcel) // Create our model class from parcel
         val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, Intent(context, MainActivity::class.java), PendingIntent.FLAG_CANCEL_CURRENT)
-        val title: String
-        val desc: String
+        val title: String = reminder.title
+        val desc: String = reminder.msg
 
         val notification = NotificationCompat.Builder(context, "Reminders")
-                .setContentTitle("random title ")
-                .setContentText("hey there")
+                .setContentTitle(title)
+                .setContentText(desc)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pendingIntent)
                 .build()

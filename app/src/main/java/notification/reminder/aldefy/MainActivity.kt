@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.DateFormat
@@ -23,12 +24,20 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         btnDTProb.setOnClickListener {
-            isSolution = false
-            showDatePicker()
+            if (etTitle.text.isNullOrEmpty() || etDesc.text.isNullOrEmpty()) {
+                Toast.makeText(this@MainActivity, "Please enter some text", Toast.LENGTH_SHORT).show()
+            } else {
+                isSolution = false
+                showDatePicker()
+            }
         }
         btnDTSolution.setOnClickListener {
-            isSolution = true
-            showDatePicker()
+            if (etTitle.text.isNullOrEmpty() || etDesc.text.isNullOrEmpty()) {
+                Toast.makeText(this@MainActivity, "Please enter some text", Toast.LENGTH_SHORT).show()
+            } else {
+                isSolution = true
+                showDatePicker()
+            }
         }
     }
 
@@ -46,12 +55,12 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
         pickedDateTime = GregorianCalendar(year, monthOfYear, dayOfMonth).time
-        tvReminder.text = String.format(resources.getString(R.string.reminder_set_for), df.format(pickedDateTime) )
+        tvReminder.text = String.format(resources.getString(R.string.reminder_set_for), df.format(pickedDateTime))
         val model = Model(msg = "some random message", title = "Hey yea this is title")
         if (isSolution)
-            scheduleReminderNotificationSolution(this@MainActivity, 30, model)
+            scheduleReminderNotificationSolution(this@MainActivity, model)
         else
-            scheduleReminderNotificationProblem(this@MainActivity, 30, model)
+            scheduleReminderNotificationProblem(this@MainActivity, model)
     }
 
 
