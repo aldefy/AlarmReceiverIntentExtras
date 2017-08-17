@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
         pickedDateTime = GregorianCalendar(year, monthOfYear, dayOfMonth).time
         tvReminder.text = String.format(resources.getString(R.string.reminder_set_for), df.format(pickedDateTime))
-        val model = Model(msg = "some random message", title = "Hey yea this is title")
+        val model = Model(msg = etDesc.text.toString(), title = etTitle.text.toString())
         if (isSolution)
             scheduleReminderNotificationSolution(this@MainActivity, model)
         else
